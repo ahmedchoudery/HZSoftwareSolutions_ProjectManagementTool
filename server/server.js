@@ -11,24 +11,24 @@ const app = express();
 const server = http.createServer(app);
 const io = socketIo(server);
 
-// Connect Database
+
 connectDB();
 
-// Middleware
+
 app.use(cors());
 app.use(express.json({ extended: false }));
 
-// Attach IO to request to use in routes
+
 app.use((req, res, next) => {
     req.io = io;
     next();
 });
 
-// Routes
+
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api', require('./routes/api'));
 
-// Socket.io logic
+
 io.on('connection', (socket) => {
     console.log('New client connected');
 
@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
     });
 });
 
-// Serve static assets in production (or just for this simple setup)
+
 app.use(express.static(path.join(__dirname, '../client')));
 
 app.get('*', (req, res) => {

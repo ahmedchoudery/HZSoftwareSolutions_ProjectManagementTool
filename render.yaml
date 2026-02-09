@@ -1,0 +1,14 @@
+services:
+  - type: web
+    name: hz-project-management
+    env: node
+    plan: free
+    buildCommand: cd server && npm install
+    startCommand: cd server && node server.js
+    envVars:
+      - key: MONGO_URI
+        sync: false # Set this in Render dashboard for security
+      - key: JWT_SECRET
+        sync: false # Set this in Render dashboard for security
+      - key: PORT
+        value: 10000

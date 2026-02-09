@@ -7,11 +7,17 @@ const connectDB = async () => {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         });
-        console.log('MongoDB Connected...');
+        console.log('✅ MongoDB Connected...');
     } catch (err) {
-        console.error('Error connecting to MongoDB:', err.message);
+        console.error('❌ Error connecting to MongoDB:');
+        console.error('Message:', err.message);
+        console.error('URI Attempted:', mongoURI.replace(/:([^:@]+)@/, ':****@')); // Hide password if present
 
-        console.log('Ensure you have MongoDB running on localhost:27017 or set MONGO_URI in .env');
+        console.log('\nPossible fixes:');
+        console.log('1. If using localhost: Ensure MongoDB service is running (mongod).');
+        console.log('2. If using Atlas: Ensure your IP address is whitelisted in Atlas Network Access.');
+        console.log('3. Ensure MONGO_URI in server/.env is correct.\n');
+
         process.exit(1);
     }
 };

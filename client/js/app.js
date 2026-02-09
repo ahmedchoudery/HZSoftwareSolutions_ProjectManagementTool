@@ -11,10 +11,24 @@ async function apiCall(url, method = 'GET', body = null) {
     const config = { method, headers };
     if (body) config.body = JSON.stringify(body);
 
-    const res = await fetch(url, config);
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.msg || 'Error');
-    return data;
+    try {
+        const res = await fetch(url, config);
+        const contentType = res.headers.get('content-type');
+        let data;
+
+        if (contentType && contentType.includes('application/json')) {
+            data = await res.json();
+        } else {
+            const text = await res.text();
+            throw new Error(text || `Server responded with status ${res.status}`);
+        }
+
+        if (!res.ok) throw new Error(data.msg || 'Error');
+        return data;
+    } catch (err) {
+        console.error('API Call Error:', err);
+        throw err;
+    }
 }
 
 socket.on('task_update', (data) => {
