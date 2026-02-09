@@ -1,9 +1,13 @@
-(node:6364) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+(node:23288) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
 (Use `node --trace-deprecation ...` to show where the warning was created)
 Server started on port 5000
-New client connected
-Operation `users.findOne()` buffering timed out after 10000ms
-Operation `users.findOne()` buffering timed out after 10000ms
-Operation `users.findOne()` buffering timed out after 10000ms
-Error connecting to MongoDB: connect ECONNREFUSED ::1:27017, connect ECONNREFUSED 127.0.0.1:27017
-Ensure you have MongoDB running on localhost:27017 or set MONGO_URI in .env
+❌ Error connecting to MongoDB:
+Message: querySrv ECONNREFUSED _mongodb._tcp.cluster0.nhatw3r.mongodb.net
+C:\Users\JAPAN COMPUTERS\OneDrive\Desktop\HZSoftwareSolutions_ProjectManagementTool\server\config\db.js:14
+        console.error('URI Attempted:', mongoURI.replace(/:([^:@]+)@/, ':****@')); // Hide password if present
+                                        ^
+
+ReferenceError: mongoURI is not defined
+    at connectDB (C:\Users\JAPAN COMPUTERS\OneDrive\Desktop\HZSoftwareSolutions_ProjectManagementTool\server\config\db.js:14:41)
+
+Node.js v25.4.0
